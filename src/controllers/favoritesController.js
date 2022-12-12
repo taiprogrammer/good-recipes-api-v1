@@ -15,6 +15,21 @@ function list(req, res) {
     });
 }
 
+function listOnlyFive(req, res) {
+  favoritesModel
+    .listOnlyFive()
+    .then((response) => {
+      if (response.length > 0) {
+        res.status(200).json(response);
+      } else {
+        res.status(204).send("Nenhum registro encontrado.");
+      }
+    })
+    .catch((error) => {
+      res.status(500).json(error.sqlMessage);
+    });
+}
+
 function add(req, res) {
   const fk_receita = req.params.fk_receita;
 
@@ -41,4 +56,4 @@ function delete_(req, res) {
     });
 }
 
-module.exports = { list, add, delete_ };
+module.exports = { list, add, delete_, listOnlyFive };

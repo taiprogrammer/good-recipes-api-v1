@@ -6,6 +6,12 @@ function list() {
   return database.execute(instruction);
 }
 
+function listTop5() {
+  const instruction = `SELECT * FROM RECEITA LIMIT 5;`;
+
+  return database.execute(instruction);
+}
+
 function add(nome, tempo, porcoes, ingredientes, modo_preparo) {
   const instruction = `
     INSERT INTO RECEITA (nome, tempo, porcoes, ingredientes, modo_preparo)
@@ -72,6 +78,7 @@ module.exports = {
   update,
   bind,
   delete_,
+  listTop5,
   get_favorites_quantity,
   get_recipes_by_id,
 };

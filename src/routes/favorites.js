@@ -7,6 +7,10 @@ router.get("/", (req, res) => {
   favoritesController.list(req, res);
 });
 
+router.get("/five", (req, res) => {
+  favoritesController.listOnlyFive(req, res);
+});
+
 router.post("/favoritar/:fk_receita", (req, res) => {
   favoritesController.add(req, res);
 });

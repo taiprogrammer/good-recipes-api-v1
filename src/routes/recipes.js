@@ -7,6 +7,10 @@ router.get("/", (req, res) => {
   recipesController.list(req, res);
 });
 
+router.get("/top-5", (req, res) => {
+  recipesController.listTop5(req, res);
+});
+
 router.get("/favoritos/:fk_favorito", (req, res) => {
   recipesController.get_favorites_quantity(req, res);
 });

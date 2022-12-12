@@ -10,6 +10,16 @@ function list() {
   return database.execute(instruction);
 }
 
+function listOnlyFive() {
+  const instruction = `
+  SELECT f.id, nome, tempo, porcoes 
+  FROM FAVORITOS f INNER JOIN
+  RECEITA ON f.fk_receita = RECEITA.id LIMIT 5;
+`;
+
+  return database.execute(instruction);
+}
+
 function add(fk_receita) {
   const instruction = `
         INSERT INTO FAVORITOS (fk_receita) VALUES (${fk_receita});
@@ -26,4 +36,4 @@ function delete_(id) {
   return database.execute(instruction);
 }
 
-module.exports = { list, add, delete_ };
+module.exports = { list, add, delete_, listOnlyFive };

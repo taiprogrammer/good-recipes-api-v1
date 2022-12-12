@@ -15,6 +15,21 @@ function list(req, res) {
     });
 }
 
+function listTop5(req, res) {
+  recipesModel
+    .listTop5()
+    .then((response) => {
+      if (response.length > 0) {
+        res.status(200).json(response);
+      } else {
+        res.status(204).send("Nanhuma receita registrada.");
+      }
+    })
+    .catch((error) => {
+      res.status(500).json(error.sqlMessage);
+    });
+}
+
 function add(req, res) {
   const nome = req.body.nomeServer;
   const tempo = req.body.tempoServer;
@@ -114,6 +129,7 @@ function get_recipes_by_id(req, res) {
 
 module.exports = {
   list,
+  listTop5,
   add,
   update,
   bind,
