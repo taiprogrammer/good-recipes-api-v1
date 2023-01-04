@@ -1,4 +1,6 @@
 const userModel = require("../models/userModel");
+const jwt = require("jsonwebtoken");
+const SECRET = "secret-passcode";
 
 function list(req, res) {
   userModel
@@ -23,6 +25,10 @@ function login(req, res) {
     .login(email, senha)
     .then((response) => {
       if (response.length > 0) {
+        const token = jwt.sign({ userId: response[0].id }, SECRET, {
+          expiresIn: 500,
+        });
+        res.json({ auth: true, token });
         res.status(200).json(response);
       } else {
         res.status(204).json("Nenhum usuário encontrado");
@@ -148,13 +154,14 @@ function update(req, res) {
   const email = req.body.email;
   const data_nascimento = req.body.data_nascimento;
 
-  userModel.update(nome, email, data_nascimento, id)
-  .then((response) => {
-    res.json(response);
-  })
-  .catch((error) => {
-    res.status(500).json(error);
-  });
+  userModel
+    .update(nome, email, data_nascimento, id)
+    .then((response) => {
+      res.json(response);
+    })
+    .catch((error) => {
+      res.status(500).json(error);
+    });
 }
 
 function get_address(req, res) {

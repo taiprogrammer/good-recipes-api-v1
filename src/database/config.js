@@ -5,7 +5,7 @@ const config = {
   database: "recipes",
   user: "root",
   password: "urubutaiza",
-  port: 3307,
+  port: 3306,
   ssl: false,
 };
 
